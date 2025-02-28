@@ -2,7 +2,17 @@
    table {border-spacing: 0px;border-right:1px solid black;border-top:1px solid black;}
   .S {border-bottom: 1px solid black;}
   .O {border-left: 1px solid black;}
+    
+
   td{width: 10px; height: 10px}
+
+  {% for x, y in maze.plus_court_chemin() %}
+    #para{{x}}_{{y}} {background-color: red;}
+    
+  {% endfor %}
+   
+
+  /*#0_0  {background-color: red;}*/
 </style>
 
 <h1>Labyrinthe {{maze.largeur}}x{{maze.hauteur}}</h1>
@@ -13,7 +23,8 @@
 
     <tr>
         {% for cellule in ligne %}
-        <td class = "{{cellule.get_class_from_cell()}}"></td>
+
+        <td id = "para{{cellule.x}}_{{cellule.y}}" class = "{{cellule.get_class_from_cell()}}"></td>
         {% endfor %}
     </tr>
     {% endfor %}
