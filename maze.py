@@ -158,25 +158,34 @@ class Labyrinthe:
             hr.write(html_template)
             
     def show_graphe(self) :
+        start = list(self.graphe.nodes)[0]
+        end = sortie = list(self.graphe.nodes)[-1]
         options = {
-            "font_size": 15,
-            "node_size": 800,
-            "node_color": "#A0CBE2",
-            "edgecolors": "tab:black",
-            "alpha": 0.9,
-            "linewidths": 2,
-            "width": 2,
+            "font_size": 6,
+            "node_size": 220,
+            "edgecolors": "tab:blue",
+            "alpha": 0.7,
+            "linewidths": 1,
+            "width": 1,
         }
-        plt.figure(figsize=(5,5), facecolor='lightskyblue')
+        
+        plt.figure(figsize=(25,25))
         pos = nx.nx_agraph.graphviz_layout(self.graphe)
-        nx.draw(self.graphe, pos, with_labels=True)
+        court_chemin = self.plus_court_chemin()
+        color_map=['#FFA500' if node in court_chemin else '#A0CBE2' for node in self.graphe]
+        print(color_map)
+        nx.draw(self.graphe, pos, node_color=color_map, with_labels=True, **options) 
         plt.show()
 
 
-        
-    
+# G = nx.cycle_graph(24)
+# color_map=['#FFA500' if node==0 else '#A0CBE2' for node in G]
+# pos = nx.circular_layout(G)
+# nx.draw(G, pos, node_color=color_map, node_size=800, cmap=plt.cm.Blues)
+# plt.show()
+#     
 
 #cellule = Cellule(murNord=True, murEst=False, murSud=True, murOuest=True)
-h=20
-w=20
+h=15
+w=15
 labyrinthe = Labyrinthe(h, w, hasard = True)
